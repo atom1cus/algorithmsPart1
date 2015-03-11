@@ -16,6 +16,7 @@
 
     <modules>
         <module>Week01</module>
+        <module>Week02</module>
     </modules>
 
     <build>
