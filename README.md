@@ -1,2 +1,2 @@
-# algorithmsPart1
+# algorithmsPartI
 Algorithms Part I by Kevin Wayne, Robert Sedgewick
