@@ -24,9 +24,8 @@ public class Subset {
 
         RandomizedQueue<String> queue = new RandomizedQueue<>();
 
-        String[] strings = StdIn.readAllLines();
-        for (String string : strings) {
-            queue.enqueue(string);
+        while (!StdIn.isEmpty()) {
+            queue.enqueue(StdIn.readString());
         }
 
         for (int i = 0; i < k; i++) {

@@ -1,3 +1,5 @@
+import org.junit.Test;
+
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -9,7 +11,9 @@ public class RandomizedQueueTest {
     public static final String BACK = "back";
     public static final String EXCLAMATION_MARKS = "!!!";
     public static final String TEST = "test";
-    public static final int TEST_SIZE = 10;
+    public static final int TEST_SIZE = 100;
+    public static final int COUNT_OF_EXPERIMENTS = 10000;
+    public static final int COUNT_OF_ITEMS = 10;
 
     @org.junit.Test
     public void testIsEmpty() throws Exception {
@@ -139,93 +143,41 @@ public class RandomizedQueueTest {
         Iterator<Integer> iteratorTwo = queue.iterator();
         int sameItemCount = 0;
         for (int i = 0; i < TEST_SIZE; i++) {
-            Integer firstValue = iteratorOne.next();
-            System.out.println("firstValue = " + firstValue);
-            Integer secondValue = iteratorTwo.next();
-            System.out.println("secondValue = " + secondValue);
-            if (firstValue.equals(secondValue)) {
+            if (iteratorOne.next().equals(iteratorTwo.next())) {
                 sameItemCount++;
             }
         }
         assertTrue(sameItemCount < TEST_SIZE);
     }
 
-    @org.junit.Test
-    public void testName() throws Exception {
-        RandomizedQueue<Integer> queue = new RandomizedQueue<>();
-        queue.enqueue(31);
-        queue.enqueue(49);
-        assertEquals(2, queue.size());
-        queue.enqueue(49);
-        queue.enqueue(2);
-        queue.enqueue(1);
-        assertEquals(5, queue.size());
-        Integer sample = queue.sample();
-        System.out.println("sample = " + sample);
-        assertNotNull(sample);
+    @Test
+    public void testRandomnessOfIterator() throws Exception {
+        int[] countOfReturnedA = new int[COUNT_OF_ITEMS];
+        for (int i = 0; i < COUNT_OF_EXPERIMENTS; i++) {
+            RandomizedQueue<Integer> queue = new RandomizedQueue<>();
+            for (int j = 0; j < COUNT_OF_ITEMS; j++) {
+                 queue.enqueue(j + 1);
 
-//        Test 4: Calls to enqueue(), dequeue(), sample(), isEmpty(), and size().
-//                *     5 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
-//        *    50 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
-//        - failed on operation 8 of 50
-//                - sample() returned null
-//                - sequence of randomized queue operations was:
-//        rq.enqueue(31)
-//        rq.enqueue(49)
-//        rq.size()        ==> 2
-//        rq.enqueue(49)
-//        rq.enqueue(2)
-//        rq.enqueue(1)
-//        rq.size()        ==> 5
-//        rq.size()        ==> 5
-//        rq.sample()      ==> null
-//
-//                *   500 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
-//        java.lang.NullPointerException
-//        RandomizedQueue.dequeue(RandomizedQueue.java:39)
-//        TestRandomizedQueue.random(TestRandomizedQueue.java:72)
-//        TestRandomizedQueue.test4(TestRandomizedQueue.java:218)
-//        TestRandomizedQueue.main(TestRandomizedQueue.java:831)
-//
-//        - sequence of dequeue operations was:
-//        rq.enqueue(260)
-//        rq.enqueue(321)
-//        rq.dequeue()
-//
-//                *  1000 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
-//        - failed on operation 15 of 1000
-//                - sample() returned null
-//
-//                *     5 random calls (0.1, 0.1, 0.6, 0.1, 0.1)
-//        *    50 random calls (0.1, 0.1, 0.6, 0.1, 0.1)
-//        - failed on operation 1 of 50
-//                - sample() returned null
-//                - sequence of randomized queue operations was:
-//        rq.enqueue(43)
-//        rq.sample()      ==> null
-//
-//                *   500 random calls (0.1, 0.1, 0.6, 0.1, 0.1)
-//        java.lang.NullPointerException
-//        RandomizedQueue.dequeue(RandomizedQueue.java:39)
-//        TestRandomizedQueue.random(TestRandomizedQueue.java:72)
-//        TestRandomizedQueue.test4(TestRandomizedQueue.java:222)
-//        TestRandomizedQueue.main(TestRandomizedQueue.java:831)
-//
-//        - sequence of dequeue operations was:
-//        rq.size()        ==> 0
-//        rq.enqueue(224)
-//        rq.dequeue()
-//
-//                *  1000 random calls (0.1, 0.1, 0.6, 0.1, 0.1)
-//        - failed on operation 5 of 1000
-//                - sample() returned null
-//                - sequence of randomized queue operations was:
-//        rq.size()        ==> 0
-//        rq.size()        ==> 0
-//        rq.size()        ==> 0
-//        rq.isEmpty()     ==> true
-//        rq.enqueue(713)
-//        rq.sample()      ==> null
+            }
 
+            Iterator<Integer> iterator = queue.iterator();
+            for (int j = 0; j < COUNT_OF_ITEMS; j++) {
+                if (Integer.valueOf(1).equals(iterator.next())) {
+                    countOfReturnedA[j]++;
+                }
+            }
+        }
+
+        int sum = 0;
+        for (int i = 0; i < COUNT_OF_ITEMS; i++) {
+            sum += countOfReturnedA[i];
+            assertTrue(countOfReturnedA[i] > 0);
+        }
+        assertEquals(COUNT_OF_EXPERIMENTS, sum);
+
+        for (int count : countOfReturnedA) {
+            System.out.print(count + " ");
+        }
+        System.out.println();
     }
 }

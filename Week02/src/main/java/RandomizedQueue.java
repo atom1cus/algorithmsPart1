@@ -126,14 +126,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         private int currentIndex;
 
+        private boolean[] iterateFlags;
+
         /**
          * Constructs deque iterator
          *
          * @param queueSize current queue size
          */
         public RandomizedQueueIterator(int queueSize) {
-            this.queueSize = queueSize;
             this.currentIndex = 0;
+            this.queueSize = queueSize;
+            this.iterateFlags = new boolean[queueSize];
         }
 
         @Override
@@ -146,7 +149,18 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             if (currentIndex >= queueSize) {
                 throw new NoSuchElementException("No more items to return.");
             }
-            return items[currentIndex++];
+            int nextIndex = getNextIndex();
+            currentIndex++;
+            iterateFlags[nextIndex] = true;
+            return items[nextIndex];
+        }
+
+        private int getNextIndex() {
+            int nextIndex;
+            do {
+                nextIndex = getRandomIndex();
+            } while(iterateFlags[nextIndex]);
+            return nextIndex;
         }
 
         @Override
