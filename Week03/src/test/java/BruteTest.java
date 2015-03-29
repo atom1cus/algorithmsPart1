@@ -6,6 +6,25 @@ import static org.junit.Assert.assertTrue;
 
 public class BruteTest extends BaseTest {
 
+//    TODO: Test 5 (stddraw): Points from a file with 5 or more on any line segment
+//    *  input6.txt
+//    -  student   solution has 1 non-null entries
+//    -  reference solution has 5 non-null entries
+//    -  4 missing entries in student solution, including: (14000, 10000) -> (32000, 10000)
+//            *  input9.txt
+//    -  student   solution has 3 non-null entries
+//    -  reference solution has 126 non-null entries
+//    -  123 missing entries in student solution, including: (5000, 5000) -> (9000, 9000)
+//            *  input10.txt
+//    -  student   solution has 2 non-null entries
+//    -  reference solution has 6 non-null entries
+//    -  4 missing entries in student solution, including: (1000, 18000) -> (4000, 30000)
+//            *  input20.txt
+//    -  student   solution has 5 non-null entries
+//    -  reference solution has 21 non-null entries
+//    -  16 missing entries in student solution, including: (5120, 29184) -> (8192, 29184)
+//            ==> FAILED
+
 
     @org.junit.Test
     public void testInput4() throws Exception {
@@ -63,6 +82,5 @@ public class BruteTest extends BaseTest {
         List<Set<Point>> tempList = getTempList(GRID_5_X_5);
         List<Set<Point>> expectedList = new ArrayList<>();
         assertTrue(checkLists(tempList, expectedList));
-        Thread.sleep(10000);
     }
 }

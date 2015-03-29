@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Before;
 
 import java.lang.reflect.Method;
@@ -19,13 +20,23 @@ public class BaseTest {
     protected static final String INPUT_4 = "input4.txt";
     protected static final String INPUT_8 = "input8.txt";
     protected static final String INPUT_10 = "input10.txt";
+    protected static final String INPUT_20 = "input20.txt";
+    protected static final String INPUT_40 = "input40.txt";
+    protected static final String INPUT_200 = "input200.txt";
+    protected static final String GRID_4_X_4 = "grid4x4.txt";
     protected static final String GRID_5_X_5 = "grid5x5.txt";
     protected static final String VERTICAL_5 = "vertical5.txt";
     protected static final String HORIZONTAL_5 = "horizontal5.txt";
 
     @Before
-    public void testName() throws Exception {
+    public void before() throws Exception {
         System.out.println("================================================");
+    }
+
+    @After
+    public void after() throws Exception {
+        StdDraw.show(3000);
+        StdDraw.clear();
     }
 
     protected List<Set<Point>> getTempList(String fileName) throws InterruptedException {

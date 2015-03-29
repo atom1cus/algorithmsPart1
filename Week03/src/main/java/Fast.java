@@ -1,5 +1,12 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+/**
+ * Implementation of fast algorithm for searching of collinear points.
+ */
 public class Fast {
 
     /**
@@ -23,63 +30,50 @@ public class Fast {
         for (int i = 0; i < points.length - 1; i++) {
             drawPoint(points[i]);
             Arrays.sort(tempPoints, points[i].SLOPE_ORDER);
-//            System.out.println("points[i] = " + points[i]);
+            //System.out.println("points[" + i + "] = " + points[i]);
 
-            int countOfSameElements = 0;
+            int samePointsCount = 1;
+            int length = tempPoints.length;
             double previousSlope = points[i].slopeTo(tempPoints[0]);
-            for (int j = 0; j < tempPoints.length; j++) {
+            for (int j = 0; j < length; j++) {
                 double nextSlope = points[i].slopeTo(tempPoints[j]);
 
                 if (previousSlope == nextSlope) {
-                    countOfSameElements++;
-                } else if (countOfSameElements == 3) {
-                    addPointsToList(points[i], list, tempPoints, countOfSameElements, j);
-                    countOfSameElements = 0;
+                    samePointsCount++;
+                } else {
+                    checkSamePoints(points[i], list, tempPoints, samePointsCount, j);
+                    samePointsCount = 1;
                 }
-
                 previousSlope = nextSlope;
-//                System.out.println(tempPoints[j] + " -> " + points[i].slopeTo(tempPoints[j]));
+                //System.out.println(tempPoints[j] + " -> "
+                //+ points[i].slopeTo(tempPoints[j]));
             }
-            if (countOfSameElements >= 3) {
-                addPointsToList(points[i], list, tempPoints, countOfSameElements, tempPoints.length);
-            }
+            checkSamePoints(points[i], list, tempPoints, samePointsCount, length);
         }
-
         return list;
     }
 
-    private void addPointsToList(Point point, List<Set<Point>> list, Point[] tempPoints, int countOfSameElements, int j) {
+    private void checkSamePoints(Point point, List<Set<Point>> list, Point[] points,
+                                 int countOfSamePoints, int j) {
+        if (countOfSamePoints >= 3) {
+            addPointsToList(point, list, points, countOfSamePoints, j);
+        }
+    }
+
+    private void addPointsToList(Point point, List<Set<Point>> list, Point[] points,
+                                 int countOfSamePoints, int j) {
         Set<Point> collinearPoints = new HashSet<>();
         collinearPoints.add(point);
-//        System.out.println("j = " + j);
-//        System.out.println("countOfSameElements = " + countOfSameElements);
+        //System.out.println("j = " + j);
+        //System.out.println("countOfSamePoints = " + countOfSamePoints);
 
-        int fromIndex = j - countOfSameElements;
-        for (int k = fromIndex; k < j; k++) {
-//            double initialSlope = point.slopeTo(tempPoints[k]);
-//            List<Point> points = Arrays.asList(tempPoints).subList(fromIndex, j + 1);
-//            if (isCollinearPoint(initialSlope, points.toArray(new Point[points.size()]), k - fromIndex)) {
-                collinearPoints.add(tempPoints[k]);
-//            }
-        }
-//        System.out.println("collinearPoints = " + collinearPoints);
+        int fromIndex = j - countOfSamePoints;
+        collinearPoints.addAll(Arrays.asList(points).subList(fromIndex, j));
+        //System.out.println("collinearPoints = " + collinearPoints);
         if (isUniquePoints(list, collinearPoints)) {
             printResult(collinearPoints);
             list.add(collinearPoints);
         }
-        //(2000, 22000) -> (3000, 26000) -> (3500, 28000) -> (4000, 30000) -> (1000, 18000)
-        //(28000, 13500) -> (23000, 16000) -> (13000, 21000) -> (3000, 26000)
-    }
-
-    private boolean isCollinearPoint(double initialSlope, Point[] points, int pointIndex) {
-//        for (int index = 0; index < points.length - 1; index++) {
-//            boolean isDifferentIndexes = (index != pointIndex);
-//            double nextSlope = points[index].slopeTo(points[index + 1]);
-//            if (isDifferentIndexes && initialSlope != nextSlope) {
-//                return false;
-//            }
-//        }
-        return true;
     }
 
     private void printResult(Set<Point> points) {
@@ -129,7 +123,8 @@ public class Fast {
     private void setInitialScale() {
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
-        StdDraw.setPenRadius(0.01);  // make the points a bit larger
+        // make the points a bit larger
+        StdDraw.setPenRadius(0.01);
     }
 
     private void drawPoint(Point point) {
