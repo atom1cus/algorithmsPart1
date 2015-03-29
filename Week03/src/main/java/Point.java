@@ -8,9 +8,14 @@ import java.util.Comparator;
 public class Point implements Comparable<Point> {
 
     /**
+     * Positive zero constant.
+     */
+    private static final double POSITIVE_ZERO = 0.0d;
+
+    /**
      * Compare points by slope.
      */
-    public final Comparator<Point> SLOPE_ORDER = null;
+    public final Comparator<Point> SLOPE_ORDER = new NewComparator();
 
     /**
      * Coordinate x.
@@ -37,7 +42,7 @@ public class Point implements Comparable<Point> {
      * Plots this point to standard drawing.
      */
     public void draw() {
-        StdDraw.point(x, y);
+        StdDraw.point(this.x, this.y);
     }
 
     /**
@@ -56,8 +61,14 @@ public class Point implements Comparable<Point> {
      * @return slope value
      */
     public double slopeTo(Point that) {
-        //TODO: implement it
-        return 0.0;
+        if (that.y == this.y && that.x == this.x) {
+            return Double.NEGATIVE_INFINITY;
+        } else if (that.y == this.y) {
+            return POSITIVE_ZERO;
+        } else if (that.x == this.x) {
+            return Double.POSITIVE_INFINITY;
+        }
+        return (double) (that.y - this.y) / (that.x - this.x);
     }
 
     /**
@@ -68,8 +79,13 @@ public class Point implements Comparable<Point> {
      * @return comparison result
      */
     public int compareTo(Point that) {
-        //TODO: implement it
-        return this.compareTo(that);
+        if (this.y == that.y && this.x == that.x) {
+            return 0;
+        } else if (this.y < that.y || (this.y == that.y && this.x < that.x)) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 
     /**
@@ -79,5 +95,22 @@ public class Point implements Comparable<Point> {
      */
     public String toString() {
         return "(" + x + ", " + y + ")";
+    }
+
+    private class NewComparator implements Comparator<Point> {
+
+        @Override
+        public int compare(Point first, Point second) {
+            Point invokingPoint = new Point(x, y);
+            double firstSlope = invokingPoint.slopeTo(first);
+            double secondSlope = invokingPoint.slopeTo(second);
+            if (firstSlope == secondSlope) {
+                return 0;
+            } else if (firstSlope > secondSlope) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
     }
 }
