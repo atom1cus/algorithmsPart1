@@ -40,6 +40,11 @@
                 <version>2.4</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.coursera</groupId>
+                <artifactId>configuration</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -59,7 +64,6 @@
         <dependency>
             <groupId>org.coursera</groupId>
             <artifactId>configuration</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -80,10 +84,10 @@
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>3.1.0</version>
                     <configuration>
-                        <configLocation>configuration/checkstyle.xml</configLocation>
+                        <configLocation>checkstyle.xml</configLocation>
                     </configuration>
                     <dependencies>
-                        <!--see https://maven.apache.org/plugins/maven-checkstyle-plugin/examples/multi-module-config.html-->
+                        <!--see https://maven.apache.org/plugins/maven-checkstyle-plugin/examples/multi-module-config.html -->
                         <dependency>
                             <groupId>org.coursera</groupId>
                             <artifactId>configuration</artifactId>
@@ -97,17 +101,31 @@
                     <version>3.12.0</version>
                     <configuration>
                         <rulesets>
-                            <ruleset>configuration/pmd.xml</ruleset>
+                            <ruleset>pmd.xml</ruleset>
                         </rulesets>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.coursera</groupId>
+                            <artifactId>configuration</artifactId>
+                            <version>1.0-SNAPSHOT</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
                     <version>3.1.12.2</version>
                     <configuration>
-                        <includeFilterFile>configuration/spotbugs.xml</includeFilterFile>
+                        <includeFilterFile>spotbugs.xml</includeFilterFile>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.coursera</groupId>
+                            <artifactId>configuration</artifactId>
+                            <version>1.0-SNAPSHOT</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -122,7 +140,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>validate</phase>
+<!--                        <phase>validate</phase>-->
                         <goals>
                             <goal>check</goal>
                         </goals>
@@ -134,7 +152,7 @@
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>validate</phase>
+<!--                        <phase>validate</phase>-->
                         <goals>
                             <goal>check</goal>
                         </goals>
@@ -146,7 +164,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>validate</phase>
+<!--                        <phase>validate</phase>-->
                         <goals>
                             <goal>check</goal>
                         </goals>

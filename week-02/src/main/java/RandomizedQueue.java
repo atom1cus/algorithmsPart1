@@ -82,6 +82,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      *
      * @return iterator object
      */
+    @Override
     public Iterator<Item> iterator() {
         return new RandomizedQueueIterator(size);
     }
@@ -124,7 +125,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      */
     private class RandomizedQueueIterator implements Iterator<Item> {
 
-        private int queueSize;
+        private final int queueSize;
 
         private int currentIndex;
 

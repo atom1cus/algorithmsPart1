@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.StdDraw;
+
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -16,7 +18,7 @@ public class Point implements Comparable<Point> {
     /**
      * Compare points by slope.
      */
-    public final Comparator<Point> SLOPE_ORDER = new NewComparator();
+    private final Comparator<Point> SLOPE_ORDER = new NewComparator();
 
     /**
      * Coordinate x.
@@ -110,6 +112,7 @@ public class Point implements Comparable<Point> {
      *
      * @return string representation of this point.
      */
+    @Override
     public String toString() {
         return "(" + x + ", " + y + ")";
     }
@@ -123,5 +126,9 @@ public class Point implements Comparable<Point> {
             double secondSlope = invokingPoint.slopeTo(second);
             return Double.compare(firstSlope, secondSlope);
         }
+    }
+
+    Comparator<Point> getSlopeOrder() {
+        return SLOPE_ORDER;
     }
 }

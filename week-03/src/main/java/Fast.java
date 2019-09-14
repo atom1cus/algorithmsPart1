@@ -33,7 +33,7 @@ public class Fast {
         Point[] tempPoints = Arrays.copyOf(points, points.length);
         for (int i = 0; i < points.length - 1; i++) {
             drawPoint(points[i]);
-            Arrays.sort(tempPoints, points[i].SLOPE_ORDER);
+            Arrays.sort(tempPoints, points[i].getSlopeOrder());
             //System.out.println("points[" + i + "] = " + points[i]);
 
             int samePointsCount = 1;

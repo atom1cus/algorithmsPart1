@@ -13,13 +13,20 @@
     <name>Week 01. Percolation</name>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.coursera</groupId>
+            <artifactId>configuration</artifactId>
+        </dependency>
+    </dependencies>
+    
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <configuration>
-                    <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+                    <suppressionsLocation>suppressions.xml</suppressionsLocation>
                 </configuration>
             </plugin>
         </plugins>

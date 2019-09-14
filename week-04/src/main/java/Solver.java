@@ -119,19 +119,12 @@ public class Solver {
      * Hamming comparator.
      */
     private static class HammingComparator implements Comparator<Board>, Serializable {
+
+        private static final long serialVersionUID = -4862926644813433707L;
+
         @Override
         public int compare(Board o1, Board o2) {
             return o1.hamming() - o2.hamming();
-        }
-
-        @Override
-        public int hashCode() {
-            return super.hashCode();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return super.equals(obj);
         }
     }
 }

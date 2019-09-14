@@ -40,12 +40,12 @@
     <!-- OCP_OVERLY_CONCRETE_PARAMETER wants Picture to be defines as java.awt.event.ActionListener -->
     <!-- NAB_NEEDLESS_BOXING_VALUEOF wants stack.push(Integer.valueOf(s)) instead of stack.push(Integer.parseInt(s)) -->
 
-    <!-- TODO: Java 7 - replace CHARSET_NAME with java.nio.charset.StandardCharsets.UTF_8 and eliminate
+    <!-- TO-DO: Java 7 - replace CHARSET_NAME with java.nio.charset.StandardCharsets.UTF_8 and eliminate
                         CSI_CHAR_SET_ISSUES_USE_STANDARD_CHARSET,
                         CSI_CHAR_SET_ISSUES_USE_STANDARD_CHARSET_NAME,
     -->
 
-    <!-- TODO: use java.nio.file.Files.newInputStream and java.nio.file.Files.newOutputStream
+    <!-- TO-DO: use java.nio.file.Files.newInputStream and java.nio.file.Files.newOutputStream
                to eliminate IOI_USE_OF_FILE_STREAM_CONSTRUCTORS
     -->
 

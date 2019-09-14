@@ -124,6 +124,7 @@ public class Deque<Item> implements Iterable<Item> {
      *
      * @return iterator object
      */
+    @Override
     public Iterator<Item> iterator() {
         return new DequeIterator(firstNode);
     }
@@ -151,7 +152,7 @@ public class Deque<Item> implements Iterable<Item> {
      */
     private class Node {
 
-        private Item item;
+        private final Item item;
         private Node nextNode;
         private Node previousNode;
 
