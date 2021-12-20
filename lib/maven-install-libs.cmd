@@ -1,1 +1,0 @@
-call mvn install:install-file -DgroupId=edu.princeton.cs -DartifactId=algs4 -Dversion=1.0.4 -Dpackaging=jar -Dfile=algs4.jar

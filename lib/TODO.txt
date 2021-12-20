@@ -1,1 +1,0 @@
-//TODO: move this dependency to configuration module

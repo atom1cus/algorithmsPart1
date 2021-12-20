@@ -18,6 +18,7 @@
            * switch statement with no default; seems OK when used for cases with (int) (4 * Math.random())
            * class  naming convention (defer to Checkstyle)
            * method naming convention (defer to Checkstyle)
+           * unused field (defer to PMD/IntelliJ since it highlight entire class)
            * class defines compareTo() and inherits equals()
       -->
     <Match>
@@ -35,23 +36,26 @@
     </Match>
 
     <!-- from fb-contrib-7.4.3.jar plugin -->
-    <!-- FCBL_FIELD_COULD_BE_LOCAL redundant with PMD -->
+    <!-- FCBL_FIELD_COULD_BE_LOCAL redundant with PMD -->  
     <!-- PME_POOR_MANS_ENUM  we disallow enum and seems to have false positives -->
     <!-- OCP_OVERLY_CONCRETE_PARAMETER wants Picture to be defines as java.awt.event.ActionListener -->
     <!-- NAB_NEEDLESS_BOXING_VALUEOF wants stack.push(Integer.valueOf(s)) instead of stack.push(Integer.parseInt(s)) -->
+    <!-- CBX_CUSTOM_BUILT_XML flags StdOut.println("> " + (r1.size() == 0)); -->
 
-    <!-- TO-DO: Java 7 - replace CHARSET_NAME with java.nio.charset.StandardCharsets.UTF_8 and eliminate
+    <!-- TODO: Java 7 - replace CHARSET_NAME with java.nio.charset.StandardCharsets.UTF_8 and eliminate
                         CSI_CHAR_SET_ISSUES_USE_STANDARD_CHARSET,
                         CSI_CHAR_SET_ISSUES_USE_STANDARD_CHARSET_NAME,
     -->
 
-    <!-- TO-DO: use java.nio.file.Files.newInputStream and java.nio.file.Files.newOutputStream
-               to eliminate IOI_USE_OF_FILE_STREAM_CONSTRUCTORS
+    <!-- TODO: use java.nio.file.Files.newInputStream and java.nio.file.Files.newOutputStream
+               to eliminate IOI_USE_OF_FILE_STREAM_CONSTRUCTORS 
     -->
 
     <Match>
         <BugPattern name="AI_ANNOTATION_ISSUES_NEEDS_NULLABLE,
                           BL_BURYING_LOGIC,
+                          CBX_CUSTOM_BUILT_XML,
+                          CC_CYCLOMATIC_COMPLEXITY,
                           CE_CLASS_ENVY,
                           CLI_CONSTANT_LIST_INDEX,
                           CSI_CHAR_SET_ISSUES_USE_STANDARD_CHARSET,
@@ -71,6 +75,7 @@
                           LSC_LITERAL_STRING_COMPARISON,
                           MAC_MANUAL_ARRAY_COPY,
                           MDM_RANDOM_SEED,
+                          MUI_CONTAINSKEY_BEFORE_GET,
                           NAB_NEEDLESS_BOXING_VALUEOF,
                           OPM_OVERLY_PERMISSIVE_METHOD,
                           OCP_OVERLY_CONCRETE_PARAMETER,
@@ -89,10 +94,12 @@
                           UCPM_USE_CHARACTER_PARAMETERIZED_METHOD,
                           USBR_UNNECESSARY_STORE_BEFORE_RETURN,
                           UVA_USE_VAR_ARGS,
+                          URF_UNREAD_FIELD,
+                          UUF_UNUSED_FIELD,
                           WEM_WEAK_EXCEPTION_MESSAGING" />
     </Match>
 
-
+    
 
     <!-- Ignore DLS_DEAD_LOCAL_STORE for low-confidence warnings (3)
          Otherwise it will flag code like the following:
@@ -260,7 +267,7 @@
 
     <Match>
         <Class name = "~AntiQuicksorter.*" />
-        <BugPattern name="HE_EQUALS_USE_HASHCODE" />
+        <BugPattern name="HE_EQUALS_USE_HASHCODE, HE_EQUALS_NO_HASHCODE" />
     </Match>
 
     <Match>
@@ -349,6 +356,12 @@
         <BugPattern name="DLS_DEAD_LOCAL_STORE" />
     </Match>
 
+    <!-- need to read m, width, and height for training images, but don't need to store -->
+    <Match>
+        <Class name = "ImageClassifier" />
+        <BugPattern name="DLS_DEAD_LOCAL_STORE" />
+    </Match>
+
     <!-- false positive in LFSR with String instance variable -->
     <Match>
         <Class name = "~(LFSR)" />
@@ -357,7 +370,7 @@
 
     <!-- string concatenation before StringBuffer is introduced -->
     <Match>
-        <Class name = "~(LFSR|MarkovModel)(126)?" />
+        <Class name = "~(LFSR|MarkovModel|Perceptron|MultiPerceptron)(126)?" />
         <BugPattern name="SBSC_USE_STRINGBUFFER_CONCATENATION" />
     </Match>
 
@@ -420,6 +433,12 @@
         <BugPattern name="SA_LOCAL_SELF_COMPARISON" />
     </Match>
 
+    <!-- n will always be non-negative -->
+    <Match>
+        <Class name = "~(Board|KdTreeST|KdTree)(226)?" />
+        <BugPattern name="IM_BAD_CHECK_FOR_ODD" />
+    </Match>
+
     <!-- ok to call board.equals(null), board.equals(string), or board.equals(board) when unit testing Board -->
     <Match>
         <Class name = "~(Board)(226)?" />
@@ -430,7 +449,7 @@
     <!-- slider puzzle, before we've introduced hashCode() -->
     <Match>
         <Class name = "~(Board)(226)?" />
-        <BugPattern name="HE_EQUALS_USE_HASHCODE" />
+        <BugPattern name="HE_EQUALS_USE_HASHCODE, HE_EQUALS_NO_HASHCODE" />
     </Match>
 
     <!-- BST style code for insert() -->
@@ -443,6 +462,12 @@
     <Match>
         <Class name = "~(SCUtility)" />
         <BugPattern name="FCCD_FIND_CLASS_CIRCULAR_DEPENDENCY" />
+    </Match>
+
+    <!-- some false positives -->
+    <Match>
+        <Class name = "~(SeamCarver)" />
+        <BugPattern name="SLS_SUSPICIOUS_LOOP_SEARCH" />
     </Match>
 
     <!-- BoggleBoard doesn't implement hashCode() or equals() and does safe test for floating-point equality -->
@@ -486,12 +511,12 @@
 
     <Match>
         <Class name = "~ScreenPrimitiveContainer.*" />
-        <BugPattern name="HE_EQUALS_USE_HASHCODE" />
+        <BugPattern name="HE_EQUALS_USE_HASHCODE, HE_EQUALS_NO_HASHCODE" />
     </Match>
 
     <Match>
         <Class name = "LineSegment" />
-        <BugPattern name="HE_EQUALS_USE_HASHCODE" />
+        <BugPattern name="HE_EQUALS_USE_HASHCODE, HE_EQUALS_NO_HASHCODE" />
     </Match>
 
 
