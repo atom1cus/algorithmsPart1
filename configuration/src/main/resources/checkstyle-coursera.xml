@@ -8,11 +8,11 @@
 <module name="Checker">
     <!-- directory where the .java file lives -->
     <!-- the property "basedir" should be passed as a -D command-line option to Java -->
-<!--    <property name="basedir" value="${basedir}" />-->
+<!-- TODO: commented  <property name="basedir" value="${basedir}" />-->
 
     <!-- suppress certain checks on a file-by-file basis -->
     <!-- the property "suppresions" should be passed as a -D command-line option to Java -->
-<!--    <module name="SuppressionFilter">-->
+<!--  TODO: commented  <module name="SuppressionFilter">-->
 <!--        <property name="file" value="${suppressions}"/>-->
 <!--        <property name="optional" value="false"/>-->
 <!--    </module>-->

@@ -329,9 +329,9 @@
             <property name="xpath">
                 <value>
                     <![CDATA[
-                        //ClassOrInterfaceDeclaration[@Image='Board' and @Nested='false']
+                        //ClassOrInterfaceDeclaration[@SimpleName='Board' and @Nested='false']
                         [count(./*/*/FieldDeclaration[@Static='false']/VariableDeclarator/VariableDeclaratorId[typeIs('int[][]')]) > 0]
-                        //PrimaryExpression/PrimaryPrefix/Name[@Image='Arrays.equals']
+                        //PrimaryExpression/PrimaryPrefix/Name[@SimpleName='Arrays.equals']
                     ]]>
                 </value>
             </property>

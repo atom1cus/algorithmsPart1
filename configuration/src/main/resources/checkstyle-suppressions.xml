@@ -290,7 +290,7 @@
     <!-- this formatting hack seems to enable us to split regexp over several lines  -->
     <suppress id="Header"
               files="^(?!.*\b(readme.txt|
-                         |HelloWorld.java|HiFour.java|Ordered.java|GreatCircle.java|RGBtoCMYK.java|
+                         |HelloWorld.java|HiFour.java|SumThree.java|Ordered.java|GreatCircle.java|RGBtoCMYK.java|
                          |Bits.java|Checkerboard.java|NoonSnooze.java|RandomWalker.java|RandomWalkers.java|RollDice.java|  
                          |NBody.java|
                          |Transform2D.java|Sierpinski.java|Art.java|
@@ -313,7 +313,7 @@
     <!--  ***********************************************************************  -->
 
     <suppress checks="LineLengthCheck|MainCallsAllPublicMethods|CommentCheck"
-              files="^(?!.*(HiFour|Ordered|GreatCircle|RGBtoCMYK|
+              files="^(?!.*(HiFour|SumThree|Ordered|GreatCircle|RGBtoCMYK|
                          |Bits|Checkerboard|NoonSnooze|RandomWalker|RandomWalkers|RollDice|
                          |NBody|
                          |Transform2D|Sierpinski|Art|
