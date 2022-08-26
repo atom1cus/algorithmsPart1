@@ -81,21 +81,20 @@ class BoardTest extends BaseTest {
         assertEquals(39, getBoard(FOUR, 7, 1, 6, 15, 4, 5, 0, 13, 14, 9, 11, 8, 3, 12, 10, 2).manhattan());
     }
 
-    @Test
-    @Ignore
-    void testTwin() {
-        assertEquals(TRIVIAL_ONE, TRIVIAL_ONE.twin());
-        System.out.println("getBoard(TWO, 1, 2, 0, 3) = " + getBoard(TWO, 1, 2, 0, 3));
-        System.out.println("getBoard(TWO, 2, 1, 0, 3).twin() = " + getBoard(TWO, 2, 1, 0, 3).twin());
-        assertEquals(getBoard(TWO, 1, 2, 0, 3), getBoard(TWO, 2, 1, 0, 3).twin());
-        assertEquals(TRIVIAL_TWO, getBoard(TWO, 1, 2, 0, 3).twin());
-        assertEquals(getBoard(TWO, 0, 1, 2, 3), getBoard(TWO, 1, 0, 2, 3).twin());
-        assertEquals(getBoard(TWO, 1, 0, 2, 3), getBoard(TWO, 0, 1, 2, 3).twin());
-
-        assertEquals(getBoard(THREE, 1, 2, 3, 4, 5, 6, 7, 0, 8), TRIVIAL_THREE.twin());
-        assertEquals(TRIVIAL_THREE, getBoard(THREE, 1, 2, 3, 4, 5, 6, 7, 0, 8).twin());
-        assertEquals(getBoard(THREE, 1, 2, 3, 4, 5, 6, 7, 0, 8), getBoard(THREE, 1, 0, 3, 4, 5, 6, 7, 2, 8));
-        assertEquals(getBoard(THREE, 4, 5, 6, 0, 8, 1, 2, 3, 7), getBoard(THREE, 4, 5, 6, 0, 8, 1, 2, 3, 7));
-    }
+//    @Test
+//    void testTwin() {
+//        assertEquals(TRIVIAL_ONE, TRIVIAL_ONE.twin());
+//        System.out.println("getBoard(TWO, 1, 2, 0, 3) = " + getBoard(TWO, 1, 2, 0, 3));
+//        System.out.println("getBoard(TWO, 2, 1, 0, 3).twin() = " + getBoard(TWO, 2, 1, 0, 3).twin());
+//        assertEquals(getBoard(TWO, 1, 2, 0, 3), getBoard(TWO, 2, 1, 0, 3).twin());
+//        assertEquals(TRIVIAL_TWO, getBoard(TWO, 1, 2, 0, 3).twin());
+//        assertEquals(getBoard(TWO, 0, 1, 2, 3), getBoard(TWO, 1, 0, 2, 3).twin());
+//        assertEquals(getBoard(TWO, 1, 0, 2, 3), getBoard(TWO, 0, 1, 2, 3).twin());
+//
+//        assertEquals(getBoard(THREE, 1, 2, 3, 4, 5, 6, 7, 0, 8), TRIVIAL_THREE.twin());
+//        assertEquals(TRIVIAL_THREE, getBoard(THREE, 1, 2, 3, 4, 5, 6, 7, 0, 8).twin());
+//        assertEquals(getBoard(THREE, 1, 2, 3, 4, 5, 6, 7, 0, 8), getBoard(THREE, 1, 0, 3, 4, 5, 6, 7, 2, 8));
+//        assertEquals(getBoard(THREE, 4, 5, 6, 0, 8, 1, 2, 3, 7), getBoard(THREE, 4, 5, 6, 0, 8, 1, 2, 3, 7));
+//    }
 
 }
